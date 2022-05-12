@@ -35,16 +35,15 @@ export class CombinationGridComponent implements OnInit {
       this.currentN = urlParameters['n'];
     });
     this.initData(this.paginationQuery);
-    console.log('init data');
   }
 
 
-  
+
   private initData(paginationQuery: PaginationQuery) {
-    this.dataService.getAsPromise<any>(environment.combinationGeneratorApiUrl + '/' + 'api' + '/' + 'combinations' + '/' + this.currentN + '/' + paginationQuery.pageIndex + '/'
-      + paginationQuery.pageSize
+    this.dataService.getAsPromise<any>(
+      `${environment.combinationGeneratorApiUrl}/api/combinations/${this.currentN}/${this.paginationQuery.pageIndex}/${this.paginationQuery.pageSize}`
+
     ).subscribe(response => {
-      console.log('response', response);
       this.dataSource = response.map((item: any) => {
         return {
           combination: item

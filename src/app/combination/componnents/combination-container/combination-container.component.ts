@@ -13,6 +13,7 @@ export class CombinationContainerComponent implements OnInit {
 
   value = 'Clear me';
    combinationCount : number  = 0;
+   currentArray : any;
   constructor(private dataService : DataService ,
     private combinationService : CombinationService,
      private router : Router) { }
@@ -20,14 +21,10 @@ export class CombinationContainerComponent implements OnInit {
   ngOnInit(): void {
   }
 
- public getStart(){
  
-  }
-
   getN(){
-    this.dataService.getAsPromise<any>(environment.combinationGeneratorApiUrl 
-      
-       + '/' + 'api' + '/' + 'combinations' + '/' + 'start' + '/' + this.value 
+    this.dataService.getAsPromise<any>(
+      `${environment.combinationGeneratorApiUrl }/api/combinations/start/${this.value}`
           ).subscribe(response=>{
           this.combinationCount = response;
           debugger;
@@ -45,10 +42,9 @@ export class CombinationContainerComponent implements OnInit {
     this.combinationCount = 0; 
   }
 
-  currentArray : any;
   getNext(){
     this.dataService.getAsPromise<any>(
-      environment.combinationGeneratorApiUrl + `/${'api/combinations/getNext'}`
+      `${environment.combinationGeneratorApiUrl}/api/combinations/getNext`
     ).subscribe(response=>{
     this.currentArray = response;
     debugger;
